@@ -1,0 +1,23 @@
+{
+  "name": "Discord-Bot",
+  "version": "1.0.0",
+  "description": "Repositorio relacionado a um bot no discord para melhorar a produtividade",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-Volpini/Discord-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-Volpini/Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/Gabriel-Volpini/Discord-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
