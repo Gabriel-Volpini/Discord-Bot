@@ -1,42 +1,99 @@
 const Discord = require("discord.js");
 const schedule = require('node-schedule');
+const config = require("./config.json");
 
 const client = new Discord.Client();
 
 
+const firstDailyTime = new schedule.RecurrenceRule();
+firstDailyTime.hour = 9;
+firstDailyTime.minute = 00;
+firstDailyTime.dayOfWeek = [0,1,2,3,4];
 
-const rule = new schedule.RecurrenceRule();
 
-rule.dayOfWeek = [0,1,2,3,4];
-rule.hour = 14;
-rule.minute = 55;
+const secondDailyTime = new schedule.RecurrenceRule();
+secondDailyTime.hour = 15;
+secondDailyTime.minute = 00;
+secondDailyTime.dayOfWeek = [0,1,2,3,4];
 
-var j = schedule.scheduleJob(rule, function(){
+
+client.on('ready', () => {console.log("Bot iniciado com sucesso")});
+
+const mudarUsariosPraDaily = () => {
+	try {
+	    const canal = client.channels.cache.get(config.DailyVoiceChannelId)
+		client.channels.cache.get(config.DailyTextChannelId).send(config.DailyWarnigMessage);
+		const list = client.guilds.cache.get("754400810628022302"); 
+
+		// setTimeout(() => { 
+			// list.members.cache.forEach(member => {
+			// 	if(!member.voice.channelID)return;
+			// 	member.voice.setChannel(canal)
+			// }) 
+		// },50000)
+
+	} catch (e) {
+		// client.channels.cache.get(config.ErroChanelId).send(`${e}`);
+		console.log(e);
+	}
+}
+const firstDailyReference = schedule.scheduleJob(firstDailyTime, mudarUsariosPraDaily);
+const secondDailyReference = schedule.scheduleJob(secondDailyTime, mudarUsariosPraDaily);
+
+
+client.on('message', message => {
+	if (message.author.bot) return;
+	if (!message.content.startsWith("!")) return
+
+	switch(message.content.slice(1).toLowerCase()){
+		case "ping":
+			message.channel.send('Pong!');
+			break;
+		case "rafa":
+			message.delete();
+			message.channel.send("Precisamos de férias!", {files: ['./img/frajuto.png']});
+			break;
+		case "almoço":
+		case "almoco":
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} foi almoçar!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AlmocoVoiceChannelId));
+			break;
+		case 'cafezin':
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} foi tomar um cafezin e ja volta!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AFKVoiceChannelId));
+			break;
+		case "afk":
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} precisou sair e ja volta!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AFKVoiceChannelId));
+			break;
+		case 'daily':
+			mudarUsariosPraDaily();
+			break;
+		case 'help':
+			message.delete();
+			message.channel.send({embed: {
+				color: 3447003,
+				title: "Comandos:",
+				fields: [
+				  { name: "Valor", value: "!help\n!ping\n!rafa\n!almoco\n!afk\n!cafezin", inline: true},
+				  { name: "Descrição", value: "Exibe uma lista dos comandos\nTempo de resposta do bot\nEnvia uma mensagem precisando de férias\nMensagem padrão de horário de almoço\nAvisa a todos que você precisou se retirar\nAvisa a todos que você foi tomar cafe", inline: true}
+				]
+			  }
+			});
+			break;
+		default:
+			message.channel.send('Comando inválido.');
+			break;
+	}
+
+	
   
-    client.channels.cache.get('752551146748379288').send('<@&752527947209900124> a daily ira começar em 5 minutos!')
-});
-
-client.on('ready', () => {
-  console.log("Bot iniciado com sucesso")
-
-
-});
-
- client.on('message', message => {
-  if (message.author.bot) return;
-    message.channel.send('pong2');
-    
-    const canal = client.channels.cache.get("752539833297141841")
-    message.member.voice.setChannel(canal, "A dayli começo coroi");
-    message.member.voice.setMute(true);
-    message.member.voice.setMute(false);
-
-  // );
-
-  //  message.guild.member.setVoiceChannel('752554624451477634');
 })
-client.login("NzUyNTg1ODQxMTU0NzE5Nzk5.X1ZyLg.wcAD02EERWMUfAw1FoChwtmyKGs");
 
+client.login(config.TokeBot);
 
 //----------------------------------------------------------------------------------
 
