@@ -1,1 +1,1 @@
-worker: node main.js git ad
+worker: node main.js
