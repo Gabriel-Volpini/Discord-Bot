@@ -4,7 +4,7 @@
   "description": "Repositorio relacionado a um bot no discord para melhorar a produtividade",
   "main": "main.js",
   "scripts": {
-    "start": "node .",
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
