@@ -1,9 +1,13 @@
+const dotenv = require('dotenv');
+if(process.env.NODE_ENV !== 'production')
+	dotenv.config();	
+
 const Discord = require("discord.js");
 const schedule = require('node-schedule');
 const config = require("./config.json");
 
 const client = new Discord.Client();
-
+const {BOT_TOKEN} = process.env;
 
 const firstDailyTime = new schedule.RecurrenceRule();
 firstDailyTime.hour = 9;
@@ -70,6 +74,7 @@ client.on('message', message => {
 			message.member.voice.setChannel(client.channels.cache.get(config.AFKVoiceChannelId));
 			break;
 		case 'daily':
+			message.delete();
 			mudarUsariosPraDaily();
 			break;
 		case 'help':
@@ -93,7 +98,7 @@ client.on('message', message => {
   
 })
 
-client.login(config.TokeBot);
+client.login(BOT_TOKEN);
 
 //----------------------------------------------------------------------------------
 

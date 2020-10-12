@@ -1,0 +1,9 @@
+{
+    "DailyTextChannelId": "754400198821806180",
+    "DailyVoiceChannelId": "754398261602680853",
+    "AlmocoVoiceChannelId":"754731140912382063",
+    "AFKTextChannelId":"755008964852318248",
+    "AFKVoiceChannelId":"754731089821565021",
+    "ErroChanelId":"752539816884961321",
+    "DailyWarnigMessage":"<@&754376317994270801> Daily!"
+}
