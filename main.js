@@ -49,7 +49,7 @@ client.on('message', message => {
 	if (message.author.bot) return;
 	if (!message.content.startsWith("!")) return
 
-	switch(message.content.slice(1).toLowerCase()){
+	switch(message.content.slice(1).split(' ')[0].toLowerCase()){
 		case "ping":
 			message.channel.send('Pong!');
 			break;
@@ -94,6 +94,7 @@ client.on('message', message => {
 			});
 			break;
 		default:
+			console.log(message.content.slice(1).toLowerCase())
 			message.channel.send('Comando inválido.');
 			break;
 	}
