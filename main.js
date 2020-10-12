@@ -73,6 +73,10 @@ client.on('message', message => {
 			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} precisou sair e ja volta!`);
 			message.member.voice.setChannel(client.channels.cache.get(config.AFKVoiceChannelId));
 			break;
+		case "send":
+			message.channel.send(message.content.slice(6));
+			message.delete();
+			break;
 		case 'daily':
 			message.delete();
 			mudarUsariosPraDaily();
