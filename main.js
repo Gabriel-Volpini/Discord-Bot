@@ -9,14 +9,16 @@ const config = require("./config.json");
 const client = new Discord.Client();
 const {BOT_TOKEN} = process.env;
 
+const HEROKU_TIMESTAMP_DIFF = 3; //horas pro brasil
+
 const firstDailyTime = new schedule.RecurrenceRule();
-firstDailyTime.hour = 9;
+firstDailyTime.hour = 9 + HEROKU_TIMESTAMP_DIFF;
 firstDailyTime.minute = 00;
 firstDailyTime.dayOfWeek = [0,1,2,3,4];
 
 
 const secondDailyTime = new schedule.RecurrenceRule();
-secondDailyTime.hour = 15;
+secondDailyTime.hour = 15 + HEROKU_TIMESTAMP_DIFF;
 secondDailyTime.minute = 00;
 secondDailyTime.dayOfWeek = [0,1,2,3,4];
 
