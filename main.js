@@ -14,7 +14,7 @@ const HEROKU_TIMESTAMP_DIFF = 3; //horas pro brasil
 const firstDailyTime = new schedule.RecurrenceRule();
 firstDailyTime.hour = 9 + HEROKU_TIMESTAMP_DIFF;
 firstDailyTime.minute = 00;
-firstDailyTime.dayOfWeek = [0,1,2,3,4];
+firstDailyTime.dayOfWeek = [1,2,3,4,5];
 
 
 const secondDailyTime = new schedule.RecurrenceRule();
