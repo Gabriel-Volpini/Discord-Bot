@@ -20,7 +20,7 @@ firstDailyTime.dayOfWeek = [1,2,3,4,5];
 const secondDailyTime = new schedule.RecurrenceRule();
 secondDailyTime.hour = 15 + HEROKU_TIMESTAMP_DIFF;
 secondDailyTime.minute = 00;
-secondDailyTime.dayOfWeek = [0,1,2,3,4];
+secondDailyTime.dayOfWeek = [1,2,3,4,5];
 
 
 client.on('ready', () => {console.log("Bot iniciado com sucesso")});
