@@ -59,6 +59,31 @@ client.on('message', message => {
 			message.delete();
 			message.channel.send("Precisamos de férias!", {files: ['./img/frajuto.png']});
 			break;
+		case "rafa2":
+			message.delete();
+			message.channel.send("Rafa-Multi-Threads v3.cR0$$!", {files: ['./img/rafa-multi-threads.png']});
+			break;
+		case "crossfit":
+		case "almoçareirnocross":
+		case "cross":
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} foi crossfitar!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AlmocoVoiceChannelId));
+			break;
+		case "vpn":
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} está usando a VPN!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AlmocoVoiceChannelId));
+			break;
+		case "finalizar":
+			message.delete();
+			client.channels.cache.get(config.AFKTextChannelId).send(`${message.member.displayName} está finalizando por hoje, até mais!`);
+			message.member.voice.setChannel(client.channels.cache.get(config.AlmocoVoiceChannelId));
+			break;
+		case "vitao":
+			message.delete();
+			message.channel.send("Rafa tá de ferias!?", {files: ['./img/rafa_ta_de_ferias.png']});
+			break;
 		case "almoço":
 		case "almoco":
 			message.delete();
@@ -89,8 +114,38 @@ client.on('message', message => {
 				color: 3447003,
 				title: "Comandos:",
 				fields: [
-				  { name: "Valor", value: "!help\n!ping\n!rafa\n!almoco\n!afk\n!cafezin", inline: true},
-				  { name: "Descrição", value: "Exibe uma lista dos comandos\nTempo de resposta do bot\nEnvia uma mensagem precisando de férias\nMensagem padrão de horário de almoço\nAvisa a todos que você precisou se retirar\nAvisa a todos que você foi tomar cafe", inline: true}
+				{ 
+					name: "Valor", 
+					value:   `!help
+							\n!ping
+							\n!rafa
+							\n!rafa2
+							\n!vitao
+							\n!almoco
+							\n!afk
+							\n!cross
+							\n!cafezin
+							\n!vpn
+							\n!finalizar
+							`, 
+					inline: true
+				},
+				{ 	
+					name: "Descrição", 
+					value:   `Exibe uma lista dos comandos
+					  		\nTempo de resposta do bot
+					  		\nEnvia uma mensagem precisando de férias
+					  		\nNão sei tem quer ver schrödinger
+					  		\nRafa está de férias?
+					  		\nMensagem padrão de horário de almoço
+					  		\nAvisa a todos que você precisou se retirar
+							\nAvisa a todos que você foi pro Cross
+							\nAvisa a todos que você foi tomar cafe
+							\nAvisa a todos que vai utilizar a VPN
+							\nAvisa a todos que você está finalizando por hoje
+							`, 
+					inline: true
+				}
 				]
 			  }
 			});
