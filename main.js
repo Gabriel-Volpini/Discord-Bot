@@ -12,16 +12,9 @@ const {BOT_TOKEN} = process.env;
 const HEROKU_TIMESTAMP_DIFF = 3; //horas pro brasil
 
 const firstDailyTime = new schedule.RecurrenceRule();
-firstDailyTime.hour = 9 + HEROKU_TIMESTAMP_DIFF;
+firstDailyTime.hour = 10 + HEROKU_TIMESTAMP_DIFF;
 firstDailyTime.minute = 00;
 firstDailyTime.dayOfWeek = [1,2,3,4,5];
-
-
-const secondDailyTime = new schedule.RecurrenceRule();
-secondDailyTime.hour = 15 + HEROKU_TIMESTAMP_DIFF;
-secondDailyTime.minute = 00;
-secondDailyTime.dayOfWeek = [1,2,3,4,5];
-
 
 client.on('ready', () => {console.log("Bot iniciado com sucesso")});
 
@@ -43,9 +36,6 @@ const mudarUsariosPraDaily = () => {
 		console.log(e);
 	}
 }
-const firstDailyReference = schedule.scheduleJob(firstDailyTime, mudarUsariosPraDaily);
-const secondDailyReference = schedule.scheduleJob(secondDailyTime, mudarUsariosPraDaily);
-
 
 client.on('message', message => {
 	if (message.author.bot) return;
