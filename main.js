@@ -37,6 +37,8 @@ const mudarUsariosPraDaily = () => {
 	}
 }
 
+//ToDo: Refatorar
+
 client.on('message', message => {
 	if (message.author.bot) return;
 	if (!message.content.startsWith("!")) return
@@ -71,9 +73,14 @@ client.on('message', message => {
 			message.member.voice.setChannel(client.channels.cache.get(config.AlmocoVoiceChannelId));
 			break;
 		case "vitao":
+				message.delete();
+				message.channel.send("Rafa tá de ferias!?", {files: ['./img/rafa_ta_de_ferias.png']});
+				break;
+		case "vita1":
 			message.delete();
-			message.channel.send("Rafa tá de ferias!?", {files: ['./img/rafa_ta_de_ferias.png']});
+			message.channel.send("Vita1: futuro arquiteto de software", {files: ['./img/vita1.png']});
 			break;
+		// ToDo: adicionar mais variacoes de almoco pro lucas errar
 		case "almoço":
 		case "almoco":
 			message.delete();
