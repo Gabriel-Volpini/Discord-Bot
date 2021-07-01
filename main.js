@@ -55,6 +55,10 @@ client.on('message', message => {
 			message.delete();
 			message.channel.send("Rafa-Multi-Threads v3.cR0$$!", {files: ['./img/rafa-multi-threads.png']});
 			break;
+		case "rafaQA":
+			message.delete();
+			message.channel.send("Aprovado pelo rafa!", {files: ['./img/selo_rafa_de_qualidade.png']});
+			break;
 		case "crossfit":
 		case "almoçareirnocross":
 		case "cross":
