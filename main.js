@@ -109,6 +109,9 @@ client.on('message', message => {
             case 'treinardeverdade':
                 academiaCommand(message);
                 break;
+            case 'deploynasexta':
+                deployNaSextaCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -185,6 +188,10 @@ function getAlmocoVoiceChannelId(message) {
     const chat = client.channels.cache.find(c => c.type == 'voice' && c.name.toLowerCase() == 'almoço' && c.guild == discordId)
         //@ts-ignore
     return chat.id
+}
+
+function deployNaSextaCommand(message) {
+    message.channel.send("Pega a Becks pq sextou com deploy!", { files: ['./img/sextou_com_deploy.jpg'] });
 }
 
 function academiaCommand(message) {
@@ -314,6 +321,7 @@ const helpCommandInfo = {
     academia: 'Bora treinar',
     reuniao: 'Estou em reunião',
     devolta: 'Voltei!',
+    deployNaSexta: 'Pega a Becks pq sextou com deploy!',
 }
 
 function helpCommand(message) {
