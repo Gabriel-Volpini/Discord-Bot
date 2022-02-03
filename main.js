@@ -120,7 +120,7 @@ client.on('message', message => {
     }
 })
 
-client.login("NTMyNzU2OTQ2MDEzNjUwOTU2.XDa2kg.fl_mUbQA5u3PUSD-eJNpdo5xI0s");
+client.login(BOT_TOKEN);
 
 //----------------------------------------------------------------------------------
 
