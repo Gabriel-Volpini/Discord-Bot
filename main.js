@@ -115,6 +115,7 @@ client.on('message', message => {
                 break;
         }
     } catch (e) {
+        console.log(`Error command: ${message.content}`)
         console.log(e);
         console.log(JSON.stringify(e));
     }
