@@ -188,39 +188,39 @@ function getAlmocoVoiceChannelId(message) {
 }
 
 function academiaCommand(message) {
-    message.delete();
+    // message.delete();
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi pra academia!`);
     message.member.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
 function devoltaCommand(message) {
-    message.delete();
+    // message.delete();
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está de volta!`);
 }
 
 function reuniaoCommand(message) {
-    message.delete();
+    // message.delete();
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está em reunião!`);
     message.member.voice.setChannel(getReuniaoVoiceChannelId(message));
 }
 
 function rafaCommand(message) {
-    message.delete();
+    // message.delete();
     message.channel.send("Precisamos de férias!", { files: ['./img/frajuto.png'] });
 }
 
 function rafa2Command(message) {
-    message.delete();
+    // message.delete();
     message.channel.send("Rafa-Multi-Threads v3.cR0$$!", { files: ['./img/rafa-multi-threads.png'] });
 }
 
 function rafaQACommand(message) {
-    message.delete();
+    // message.delete();
     message.channel.send("Aprovado pelo rafa! :rafa_QA:", { files: ['./img/selo_rafa_de_qualidade.png'] });
 }
 
 function crossCommand(message) {
-    message.delete();
+    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi crossfitar!`);
     //@ts-ignore
@@ -228,7 +228,7 @@ function crossCommand(message) {
 }
 
 function vpnCommand(message) {
-    message.delete();
+    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está usando a VPN!`);
     //@ts-ignore
@@ -236,7 +236,7 @@ function vpnCommand(message) {
 }
 
 function finalizarCommand(message) {
-    message.delete();
+    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está finalizando por hoje, até mais!`);
 
@@ -245,17 +245,17 @@ function finalizarCommand(message) {
 }
 
 function vitaoCommand(message) {
-    message.delete();
+    // message.delete();
     message.channel.send("Rafa tá de ferias!?", { files: ['./img/rafa_ta_de_ferias.png'] });
 }
 
 function vita1Command(message) {
-    message.delete();
+    // message.delete();
     message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
 }
 
 function almocoCommand(message) {
-    message.delete();
+    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi almoçar!`);
     //@ts-ignore
@@ -263,7 +263,7 @@ function almocoCommand(message) {
 }
 
 function cafezinCommand(message) {
-    message.delete();
+    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi tomar um cafezin e ja volta!`);
 
@@ -272,7 +272,7 @@ function cafezinCommand(message) {
 }
 
 function afkCommand(message) {
-    message.delete();
+    // message.delete();
     const notificaoId = getNotificacoesVoiceChannelId(message)
         //@ts-ignore
     client.channels.cache.get(notificaoId).send(`${message.member.displayName} precisou sair e ja volta!`);
@@ -282,13 +282,13 @@ function afkCommand(message) {
 }
 
 function sendCommand(message) {
-    message.delete();
+    // message.delete();
     message.channel.send(message.content.slice(6));
 }
 
 function dailyCommand(message) {
     try {
-        message.delete();
+        // message.delete();
         message.channel.send("@everyone Daily!");
     } catch (e) {
         console.log(e);
