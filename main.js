@@ -112,7 +112,7 @@ client.on('message', message => {
             case 'deploynasexta':
                 deployNaSextaCommand(message);
                 break;
-            case 'tipoItem':
+            case 'tipoitem':
                 tipoItemCommand(message);
                 break;
             default:
