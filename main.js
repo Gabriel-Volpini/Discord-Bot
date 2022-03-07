@@ -112,6 +112,9 @@ client.on('message', message => {
             case 'deploynasexta':
                 deployNaSextaCommand(message);
                 break;
+            case 'tipoItem':
+                tipoItemCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -256,6 +259,11 @@ function vitaoCommand(message) {
     message.channel.send("Rafa tá de ferias!?", { files: ['./img/rafa_ta_de_ferias.png'] });
 }
 
+function tipoItemCommand(message) {
+    // message.delete();
+    message.channel.send("Everyday I wake up TipoItem", { files: ['./img/everyday_tipo_item.png'] });
+}
+
 function vita1Command(message) {
     // message.delete();
     message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
@@ -322,6 +330,7 @@ const helpCommandInfo = {
     reuniao: 'Estou em reunião',
     devolta: 'Voltei!',
     deployNaSexta: 'Pega a Becks pq sextou com deploy!',
+    tipoItem: 'Everyday I wake up TipoItem',
 }
 
 function helpCommand(message) {
