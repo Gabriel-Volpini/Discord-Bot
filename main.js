@@ -115,6 +115,12 @@ client.on('message', message => {
             case 'tipoitem':
                 tipoItemCommand(message);
                 break;
+            case 'saladocris':
+                sala_do_crisCommand(message);
+                break;
+            case 'php':
+                phpCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -264,6 +270,16 @@ function tipoItemCommand(message) {
     message.channel.send("Everyday I wake up TipoItem", { files: ['./img/everyday_tipo_item.png'] });
 }
 
+function sala_do_crisCommand(message) {
+    // message.delete();
+    message.channel.send(`Olá ψ(._. )>`, { files: ['./img/sala_do_cris.png'] });
+}
+
+function phpCommand(message) {
+    // message.delete();
+    message.channel.send(`PH~~ili~~P~~i~~`, { files: ['./img/php.png'] });
+}
+
 function vita1Command(message) {
     // message.delete();
     message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
@@ -331,6 +347,8 @@ const helpCommandInfo = {
     devolta: 'Voltei!',
     deployNaSexta: 'Pega a Becks pq sextou com deploy!',
     tipoItem: 'Everyday I wake up TipoItem',
+    saladocris: 'Sala do Cris',
+    php: 'PH~~ili~~P~~i~~',
 }
 
 function helpCommand(message) {
