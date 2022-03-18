@@ -118,6 +118,10 @@ client.on('message', message => {
             case 'saladocris':
                 sala_do_crisCommand(message);
                 break;
+            case 'macarrao':
+            case 'macarrão':
+                macarraoCommand(message);
+                break;
             case 'php':
                 phpCommand(message);
                 break;
@@ -223,6 +227,11 @@ function reuniaoCommand(message) {
 function rafaCommand(message) {
     // message.delete();
     message.channel.send("Precisamos de férias!", { files: ['./img/frajuto.png'] });
+}
+
+function macarraoCommand(message) {
+    // message.delete();
+    message.channel.send("Macarroneee ╰(*°▽°*)╯", { files: ['./img/boaSorteMacarrao.jpg'] });
 }
 
 function rafa2Command(message) {
@@ -349,6 +358,7 @@ const helpCommandInfo = {
     tipoItem: 'Everyday I wake up TipoItem',
     saladocris: 'Sala do Cris',
     php: 'PH~~ili~~P~~i~~',
+    macarrao: 'Boa tarde, Macarrone!',
 }
 
 function helpCommand(message) {
