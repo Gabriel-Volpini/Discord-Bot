@@ -125,6 +125,9 @@ client.on('message', message => {
             case 'php':
                 phpCommand(message);
                 break;
+            case 'sextouend':
+                sextouendCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -227,6 +230,11 @@ function reuniaoCommand(message) {
 function rafaCommand(message) {
     // message.delete();
     message.channel.send("Precisamos de férias!", { files: ['./img/frajuto.png'] });
+}
+
+function sextouendCommand(message) {
+    // message.delete();
+    message.channel.send("Weekend dev", { files: ['./img/sextouend.png'] });
 }
 
 function macarraoCommand(message) {
@@ -359,6 +367,7 @@ const helpCommandInfo = {
     saladocris: 'Sala do Cris',
     php: 'PH~~ili~~P~~i~~',
     macarrao: 'Boa tarde, Macarrone!',
+    sextouend: 'Backend? No. Frontend? No. Weekend ╰(*°▽°*)╯ !',
 }
 
 function helpCommand(message) {
