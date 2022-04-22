@@ -128,6 +128,12 @@ client.on('message', message => {
             case 'sextouend':
                 sextouendCommand(message);
                 break;
+            case 'baddeploy':
+                baddeployCommand(message);
+                break;
+            case 'gooddeploy':
+                gooddeployCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -287,6 +293,18 @@ function tipoItemCommand(message) {
     message.channel.send("Everyday I wake up TipoItem", { files: ['./img/everyday_tipo_item.png'] });
 }
 
+
+function baddeployCommand(message) {
+    // message.delete();
+    message.channel.send("Quando o deploy da ruim", { files: ['./img/deploy_deu_ruim.png'] });
+}
+
+
+function gooddeployCommand(message) {
+    // message.delete();
+    message.channel.send("Quando o deploy da bom", { files: ['./img/deploy_deu_bom.png'] });
+}
+
 function sala_do_crisCommand(message) {
     // message.delete();
     message.channel.send(`Olá ψ(._. )>`, { files: ['./img/sala_do_cris.png'] });
@@ -368,6 +386,8 @@ const helpCommandInfo = {
     php: 'PH~~ili~~P~~i~~',
     macarrao: 'Boa tarde, Macarrone!',
     sextouend: 'Backend? No. Frontend? No. Weekend ╰(*°▽°*)╯ !',
+    baddeploy: 'Quando o deploy da ruim',
+    gooddeploy: 'Quando o deploy da bom',
 }
 
 function helpCommand(message) {
