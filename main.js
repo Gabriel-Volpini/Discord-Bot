@@ -134,9 +134,9 @@ client.on('message', message => {
             case 'gooddeploy':
                 gooddeployCommand(message);
                 break;
-						case 'hollywood':
-								hollywoodCommand(message);
-								break;
+            case 'hollywood':
+                hollywoodCommand(message);
+                break;
             default:
                 console.log(message.content.slice(1).toLowerCase())
                 message.channel.send('Comando inválido.');
@@ -151,6 +151,7 @@ client.on('message', message => {
 
 client.login(BOT_TOKEN);
 
+//s
 //----------------------------------------------------------------------------------
 
 //! Lista de usuarios
@@ -293,8 +294,8 @@ function vitaoCommand(message) {
 
 
 function hollywoodCommand(message) {
-	// message.delete();
-	message.channel.send("Bora pra hollywood =) ", { files: ['./img/hollywood.jpeg'] });
+    // message.delete();
+    message.channel.send("Bora pra hollywood =) ", { files: ['./img/hollywood.jpeg'] });
 }
 
 function tipoItemCommand(message) {
@@ -397,7 +398,7 @@ const helpCommandInfo = {
     sextouend: 'Backend? No. Frontend? No. Weekend ╰(*°▽°*)╯ !',
     baddeploy: 'Quando o deploy da ruim',
     gooddeploy: 'Quando o deploy da bom',
-		hollywood: 'Bora pra hollywwood!',
+    hollywood: 'Bora pra hollywwood!',
 }
 
 function helpCommand(message) {
