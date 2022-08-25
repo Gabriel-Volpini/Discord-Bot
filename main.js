@@ -152,7 +152,7 @@ try {
         }
     })
 
-    client.login('NTMyNzU2OTQ2MDEzNjUwOTU2.Gp4MMo.98nFGwwnTb9AdU7CCgyrMylcbpws4Hjp5b647k');
+    client.login(BOT_TOKEN);
 
     //s
     //----------------------------------------------------------------------------------
