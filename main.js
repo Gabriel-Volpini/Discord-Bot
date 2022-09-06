@@ -66,6 +66,9 @@ client.on('message', message => {
             case "rafaqa":
                 rafaQACommand(message);
                 break;
+            case "cronometro":
+                cronometroCommand(message);
+                break;
             case "crossfit":
             case "almoçareirnocross":
             case "cross":
@@ -88,9 +91,13 @@ client.on('message', message => {
                 almocoCommand(message);
                 break;
             case 'cafezin':
+            case "lanchinho":
+            case "lanche":
                 cafezinCommand(message);
                 break;
             case "afk":
+            case "agua":
+            case "banheiro":
                 afkCommand(message);
                 break;
             case "send":
@@ -355,6 +362,36 @@ function vita1Command(message) {
     message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
 }
 
+function cronometroCommand(message) {
+    // message.delete();
+    const qtdRounds = Number(message.content.split(" ")[1]);
+    if (qtdRounds && Number.isInteger(qtdRounds)) {
+        message.channel.send(`Cronometro iniciado! \nRound 1 de ${qtdRounds}! \nTempo: 60s`).then((msgRef) => {
+            startCronometro(msgRef, qtdRounds, 1, 60);
+        });
+    }
+}
+
+function startCronometro(msgRef, roundTotal, roundAtual, tempo) {
+    if (roundAtual <= roundTotal) {
+        //msgRef.edit(`Cronometro iniciado! \n Round ${roundAtual} de ${roundTotal}! \n Tempo: ${tempo}s`)
+        cronometrar(msgRef, roundTotal, roundAtual, tempo);
+    } else {
+        msgRef.edit(`Cronometro finalizado! \nRound ${roundAtual - 1} de ${roundTotal}! \nTempo: Over!`)
+    }
+}
+
+function cronometrar(msgRef, roundTotal, roundAtual, tempo) {
+    if (tempo > 0) {
+        msgRef.edit(`Cronometro iniciado! \nRound ${roundAtual} de ${roundTotal}! \nTempo: ${tempo}s`)
+        setTimeout(() => {
+            cronometrar(msgRef, roundTotal, roundAtual, tempo - 5);
+        }, 5000);
+    } else {
+        startCronometro(msgRef, roundTotal, roundAtual + 1, 60);
+    }
+}
+
 function almocoCommand(message) {
     // message.delete();
     //@ts-ignore
@@ -398,6 +435,7 @@ function dailyCommand(message) {
 
 const helpCommandInfo = {
     help: 'Exibe uma lista dos comandos',
+    cronometro: 'Inicia um cronometro de 60s! quantidade de rounds é passada da seguinte forma: !cronometro 5',
     ping: 'Tempo de resposta do bot',
     rafa: 'Envia uma mensagem precisando de férias',
     rafa2: 'Não sei tem quer ver schrödinger',
