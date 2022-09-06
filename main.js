@@ -435,7 +435,7 @@ function dailyCommand(message) {
 
 const helpCommandInfo = {
     help: 'Exibe uma lista dos comandos',
-    cronometro: 'Inicia um cronometro de 60s! quantidade de rounds é passada da seguinte forma: !cronometro 5',
+    cronometro: 'Inicia um cronometro de 60s -> !cronometro 5',
     ping: 'Tempo de resposta do bot',
     rafa: 'Envia uma mensagem precisando de férias',
     rafa2: 'Não sei tem quer ver schrödinger',
