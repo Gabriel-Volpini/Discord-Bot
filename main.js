@@ -57,6 +57,12 @@ client.on('message', message => {
             case "rafa2":
                 rafa2Command(message);
                 break;
+            case "rafa3":
+                rafa3Command(message);
+                break;
+            case "rafadeploy":
+                rafaDeployCommand(message);
+                break;
             case "rafaqa":
                 rafaQACommand(message);
                 break;
@@ -257,6 +263,17 @@ function rafa2Command(message) {
     message.channel.send("Rafa-Multi-Threads v3.cR0$$!", { files: ['./img/rafa-multi-threads.png'] });
 }
 
+function rafa3Command(message) {
+    // message.delete();
+    message.channel.send("Botando o bug na rede!", { files: ['./img/saiDaquiBug.gif'] });
+}
+
+function rafaDeployCommand(message) {
+    // message.delete();
+    message.channel.send("Quando o bruno pede pra fazer deploy na noite!", { files: ['./img/rafaDeployNaSextaANoite.jpeg'] });
+}
+
+
 function rafaQACommand(message) {
     // message.delete();
     message.channel.send("Aprovado pelo rafa! :rafa_QA:", { files: ['./img/selo_rafa_de_qualidade.png'] });
@@ -376,6 +393,8 @@ const helpCommandInfo = {
     ping: 'Tempo de resposta do bot',
     rafa: 'Envia uma mensagem precisando de férias',
     rafa2: 'Não sei tem quer ver schrödinger',
+    rafa3: 'Rafa jogador botando os bugs na rede',
+    rafadeploy: 'Quando pedem pra fazer deploy a noite!! :/ :/',
     rafaQA: 'Selo de qualidade do rafa',
     vitao: 'Rafa tá de ferias!?',
     vita1: 'Vita1: futuro arquiteto de software',
