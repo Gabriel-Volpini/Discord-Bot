@@ -6,40 +6,11 @@ const Discord = require("discord.js");
 const schedule = require('node-schedule');
 const config = require("./config.json");
 
-// const cm = require("./comandosMessages.js");
-
 const client = new Discord.Client();
 const { BOT_TOKEN } = process.env;
 
-const HEROKU_TIMESTAMP_DIFF = 3; //horas pro brasil
-
-const firstDailyTime = new schedule.RecurrenceRule();
-firstDailyTime.hour = 10 + HEROKU_TIMESTAMP_DIFF;
-firstDailyTime.minute = 00;
-firstDailyTime.dayOfWeek = [1, 2, 3, 4, 5];
 
 client.on('ready', () => { console.log("Bot iniciado com sucesso") });
-
-const mudarUsariosPraDaily = () => {
-    try {
-        const canal = client.channels.cache.get(config.DailyVoiceChannelId)
-        client.channels.cache.get(config.DailyTextChannelId).send(config.DailyWarnigMessage);
-        const list = client.guilds.cache.get("754400810628022302");
-
-        // setTimeout(() => { 
-        // list.members.cache.forEach(member => {
-        // 	if(!member.voice.channelID)return;
-        // 	member.voice.setChannel(canal)
-        // }) 
-        // },50000)
-
-    } catch (e) {
-        // client.channels.cache.get(config.ErroChanelId).send(`${e}`);
-        console.log(e);
-    }
-}
-
-//ToDo: Refatorar
 
 client.on('message', message => {
     if (message.author.bot) return;
@@ -167,29 +138,6 @@ client.on('message', message => {
 
 client.login(BOT_TOKEN);
 
-//s
-//----------------------------------------------------------------------------------
-
-//! Lista de usuarios
-// const list = client.guilds.fetch("725108344221597778"); 
-// (list.then(a => console.log(a.members.cache.map(a => a.user.username))))
-
-//! Responder a um comando, mensagem em canla especifico e fazer menção
-
-// client.on('message', message => {
-// if (message.author.bot) return;
-// if (message.content === 'ping') {
-//   message.delete();
-//   message.channel.send('pong2');
-//   client.channels.cache.get('752551146748379288').send('<@&752527947209900124> Hello here!')
-// }
-// });
-
-//! Agendar uma função e reagendar
-
-
-// j.schedule({hour:10, minute:45});
-
 
 
 function getAfkVoiceChannelId(message) {
@@ -237,60 +185,50 @@ function deployNaSextaCommand(message) {
 }
 
 function academiaCommand(message) {
-    // message.delete();
+
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi pra academia!`);
     message.member.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
 function devoltaCommand(message) {
-    // message.delete();
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está de volta!`);
 }
 
 function reuniaoCommand(message) {
-    // message.delete();
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está em reunião!`);
     message.member.voice.setChannel(getReuniaoVoiceChannelId(message));
 }
 
 function rafaCommand(message) {
-    // message.delete();
     message.channel.send("Precisamos de férias!", { files: ['./img/frajuto.png'] });
 }
 
 function sextouendCommand(message) {
-    // message.delete();
     message.channel.send("Weekend dev", { files: ['./img/sextouend.png'] });
 }
 
 function macarraoCommand(message) {
-    // message.delete();
     message.channel.send("Macarroneee ╰(*°▽°*)╯", { files: ['./img/boaSorteMacarrao.jpg'] });
 }
 
 function rafa2Command(message) {
-    // message.delete();
     message.channel.send("Rafa-Multi-Threads v3.cR0$$!", { files: ['./img/rafa-multi-threads.png'] });
 }
 
 function rafa3Command(message) {
-    // message.delete();
     message.channel.send("Botando o bug na rede!", { files: ['./img/saiDaquiBug.gif'] });
 }
 
 function rafaDeployCommand(message) {
-    // message.delete();
     message.channel.send("Quando o bruno pede pra fazer deploy na noite!", { files: ['./img/rafaDeployNaSextaANoite.jpeg'] });
 }
 
 
 function rafaQACommand(message) {
-    // message.delete();
     message.channel.send("Aprovado pelo rafa! :rafa_QA:", { files: ['./img/selo_rafa_de_qualidade.png'] });
 }
 
 function crossCommand(message) {
-    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi crossfitar!`);
     //@ts-ignore
@@ -298,7 +236,6 @@ function crossCommand(message) {
 }
 
 function vpnCommand(message) {
-    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está usando a VPN!`);
     //@ts-ignore
@@ -306,7 +243,6 @@ function vpnCommand(message) {
 }
 
 function finalizarCommand(message) {
-    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está finalizando por hoje, até mais!`);
 
@@ -315,55 +251,45 @@ function finalizarCommand(message) {
 }
 
 function vitaoCommand(message) {
-    // message.delete();
     message.channel.send("Rafa tá de ferias!?", { files: ['./img/rafa_ta_de_ferias.png'] });
 }
 
 
 function hollywoodCommand(message) {
-    // message.delete();
     message.channel.send("Bora pra hollywood =) ", { files: ['./img/hollywood.jpeg'] });
 }
 
 function tipoItemCommand(message) {
-    // message.delete();
     message.channel.send("Everyday I wake up TipoItem", { files: ['./img/everyday_tipo_item.png'] });
 }
 
 
 function baddeployCommand(message) {
-    // message.delete();
     message.channel.send("Quando o deploy da ruim", { files: ['./img/deploy_deu_ruim.png'] });
 }
 
 function updatephpCommand(message) {
-    // message.delete();
     message.channel.send("Update sem where de belo monte.", { files: ['./img/updatephp.jpg'] });
 }
 
 
 function gooddeployCommand(message) {
-    // message.delete();
     message.channel.send("Quando o deploy da bom", { files: ['./img/deploy_deu_bom.png'] });
 }
 
 function sala_do_crisCommand(message) {
-    // message.delete();
     message.channel.send(`Olá ψ(._. )>`, { files: ['./img/sala_do_cris.png'] });
 }
 
 function phpCommand(message) {
-    // message.delete();
     message.channel.send(`PH~~ili~~P~~i~~`, { files: ['./img/php.png'] });
 }
 
 function vita1Command(message) {
-    // message.delete();
     message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
 }
 
 function cronometroCommand(message) {
-    // message.delete();
     const qtdRounds = Number(message.content.split(" ")[1]);
     if (qtdRounds && Number.isInteger(qtdRounds)) {
         message.channel.send(`Cronometro iniciado! \nRound 1 de ${qtdRounds}! \nTempo: 60s`).then((msgRef) => {
@@ -393,7 +319,6 @@ function cronometrar(msgRef, roundTotal, roundAtual, tempo) {
 }
 
 function almocoCommand(message) {
-    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi almoçar!`);
     //@ts-ignore
@@ -401,7 +326,6 @@ function almocoCommand(message) {
 }
 
 function cafezinCommand(message) {
-    // message.delete();
     //@ts-ignore
     client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi tomar um cafezin e ja volta!`);
 
@@ -410,7 +334,6 @@ function cafezinCommand(message) {
 }
 
 function afkCommand(message) {
-    // message.delete();
     const notificaoId = getNotificacoesVoiceChannelId(message)
         //@ts-ignore
     client.channels.cache.get(notificaoId).send(`${message.member.displayName} precisou sair e ja volta!`);
@@ -420,13 +343,12 @@ function afkCommand(message) {
 }
 
 function sendCommand(message) {
-    // message.delete();
     message.channel.send(message.content.slice(6));
 }
 
 function dailyCommand(message) {
     try {
-        // message.delete();
+
         message.channel.send("@everyone Daily!");
     } catch (e) {
         console.log(e);
@@ -467,8 +389,7 @@ const helpCommandInfo = {
     hollywood: 'Bora pra hollywwood!',
 }
 
-function helpCommand(message) {
-    message.delete();
+function helpCommand(message) {;
     message.channel.send({
         embed: {
             color: 3447003,
