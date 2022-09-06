@@ -1,18 +1,21 @@
-const dotenv = require('dotenv');
+import dotenv  from 'dotenv';
+import Discord, { Intents, PresenceData, Message } from 'discord.js';
+
 if (process.env.NODE_ENV !== 'production')
     dotenv.config();
 
-const Discord = require("discord.js");
-const schedule = require('node-schedule');
-const config = require("./config.json");
+const client = new Discord.Client({
+    intents: [
+        Intents.FLAGS.GUILDS, 
+        Intents.FLAGS.GUILD_MESSAGES
+    ]
+});
 
-const client = new Discord.Client();
 const { BOT_TOKEN } = process.env;
-
 
 client.on('ready', () => { console.log("Bot iniciado com sucesso") });
 
-client.on('message', message => {
+client.on('message', (message: Message) => {
     if (message.author.bot) return;
     if (!message.content.startsWith("!")) return;
     console.log(message.content)
@@ -140,156 +143,138 @@ client.login(BOT_TOKEN);
 
 
 
-function getAfkVoiceChannelId(message) {
+function getAfkVoiceChannelId(message: Message) {
     const discordId = message.url.split('channels')[1].split('/')[1];
-    //@ts-ignore
-    const chat = client.channels.cache.find(c => c.type == 'voice' && c.name.toLowerCase() == 'afk' && c.guild == discordId)
-        //@ts-ignore
-    return chat.id
+    const chat = client.channels.cache.find(c => c.type == 'GUILD_VOICE' && c.name.toLowerCase() == 'afk' && c.guild.id == discordId)
+    return chat!.id
 }
 
-function getReuniaoVoiceChannelId(message) {
+function getReuniaoVoiceChannelId(message: Message) {
     const discordId = message.url.split('channels')[1].split('/')[1];
-    //@ts-ignore
-    const chat = client.channels.cache.find(c => c.type == 'voice' && (c.name.toLowerCase() == 'reuniao' || c.name.toLowerCase() == 'reunião') && c.guild == discordId)
-        //@ts-ignore
-    return chat.id
+    const chat = client.channels.cache.find(c => c.type == 'GUILD_VOICE' && (c.name.toLowerCase() == 'reuniao' || c.name.toLowerCase() == 'reunião') && c.guild.id == discordId)
+    return chat!.id
 }
 
-function getNotificacoesVoiceChannelId(message) {
+function getNotificacoesVoiceChannelId(message: Message) {
     const discordId = message.url.split('channels')[1].split('/')[1];
-    //@ts-ignore
-    const chat = client.channels.cache.find(c => c.type == 'text' && c.name.toLowerCase() == 'notificações' && c.guild == discordId)
-        //@ts-ignore
-    return chat.id
+    const chat = client.channels.cache.find(c => c.type == 'GUILD_TEXT' && c.name.toLowerCase() == 'notificações' && c.guild.id == discordId)
+    return chat!.id
 }
 
-function getGeneralChannelId(message) {
+function getGeneralChannelId(message: Message) {
     const discordId = message.url.split('channels')[1].split('/')[1];
-    //@ts-ignore
-    const chat = client.channels.cache.find(c => c.type == 'text' && c.name.toLowerCase() == 'general' && c.guild == discordId)
-        //@ts-ignore
-    return chat.id
+    const chat = client.channels.cache.find(c => c.type == 'GUILD_TEXT' && c.name.toLowerCase() == 'general' && c.guild.id == discordId)
+    return chat!.id
 }
 
-function getAlmocoVoiceChannelId(message) {
+function getAlmocoVoiceChannelId(message: Message) {
     const discordId = message.url.split('channels')[1].split('/')[1];
-    //@ts-ignore
-    const chat = client.channels.cache.find(c => c.type == 'voice' && c.name.toLowerCase() == 'almoço' && c.guild == discordId)
-        //@ts-ignore
-    return chat.id
+    const chat = client.channels.cache.find(c => c.type == 'GUILD_VOICE' && c.name.toLowerCase() == 'almoço' && c.guild.id == discordId)
+    return chat!.id
 }
 
-function deployNaSextaCommand(message) {
-    message.channel.send("Pega a Becks pq sextou com deploy!", { files: ['./img/sextou_com_deploy.jpg'] });
+function deployNaSextaCommand(message: Message) {
+    message.channel.send({content: "Pega a Becks pq sextou com deploy!",  files: ['./img/sextou_com_deploy.jpg'] });
 }
 
-function academiaCommand(message) {
-
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi pra academia!`);
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function academiaCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} foi pra academia!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function devoltaCommand(message) {
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está de volta!`);
+function devoltaCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} está de volta!`);
 }
 
-function reuniaoCommand(message) {
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está em reunião!`);
-    message.member.voice.setChannel(getReuniaoVoiceChannelId(message));
+function reuniaoCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} está em reunião!`);
+    message.member?.voice.setChannel(getReuniaoVoiceChannelId(message));
 }
 
-function rafaCommand(message) {
-    message.channel.send("Precisamos de férias!", { files: ['./img/frajuto.png'] });
+function rafaCommand(message: Message) {
+    message.channel.send({content: "Precisamos de férias!",  files: ['./img/frajuto.png'] });
 }
 
-function sextouendCommand(message) {
-    message.channel.send("Weekend dev", { files: ['./img/sextouend.png'] });
+function sextouendCommand(message: Message) {
+    message.channel.send({content: "Weekend dev", files: ['./img/sextouend.png'] });
 }
 
-function macarraoCommand(message) {
-    message.channel.send("Macarroneee ╰(*°▽°*)╯", { files: ['./img/boaSorteMacarrao.jpg'] });
+function macarraoCommand(message: Message) {
+    message.channel.send({content: "Macarroneee ╰(*°▽°*)╯", files: ['./img/boaSorteMacarrao.jpg'] });
 }
 
-function rafa2Command(message) {
-    message.channel.send("Rafa-Multi-Threads v3.cR0$$!", { files: ['./img/rafa-multi-threads.png'] });
+function rafa2Command(message: Message) {
+    message.channel.send({content: "Rafa-Multi-Threads v3.cR0$$!",  files: ['./img/rafa-multi-threads.png'] });
 }
 
-function rafa3Command(message) {
-    message.channel.send("Botando o bug na rede!", { files: ['./img/saiDaquiBug.gif'] });
+function rafa3Command(message: Message) {
+    message.channel.send({content: "Botando o bug na rede!",  files: ['./img/saiDaquiBug.gif'] });
 }
 
-function rafaDeployCommand(message) {
-    message.channel.send("Quando o bruno pede pra fazer deploy na noite!", { files: ['./img/rafaDeployNaSextaANoite.jpeg'] });
+function rafaDeployCommand(message: Message) {
+    message.channel.send({content: "Quando o bruno pede pra fazer deploy na noite!",  files: ['./img/rafaDeployNaSextaANoite.jpeg'] });
 }
 
 
-function rafaQACommand(message) {
-    message.channel.send("Aprovado pelo rafa! :rafa_QA:", { files: ['./img/selo_rafa_de_qualidade.png'] });
+function rafaQACommand(message: Message) {
+    message.channel.send({content: "Aprovado pelo rafa! :rafa_QA:",  files: ['./img/selo_rafa_de_qualidade.png'] });
 }
 
-function crossCommand(message) {
-    //@ts-ignore
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi crossfitar!`);
-    //@ts-ignore
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function crossCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} foi crossfitar!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function vpnCommand(message) {
-    //@ts-ignore
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está usando a VPN!`);
-    //@ts-ignore
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function vpnCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} está usando a VPN!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function finalizarCommand(message) {
-    //@ts-ignore
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} está finalizando por hoje, até mais!`);
-
-    //@ts-ignore
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function finalizarCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} está finalizando por hoje, até mais!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function vitaoCommand(message) {
-    message.channel.send("Rafa tá de ferias!?", { files: ['./img/rafa_ta_de_ferias.png'] });
+function vitaoCommand(message: Message) {
+    message.channel.send({content: "Rafa tá de ferias!?",  files: ['./img/rafa_ta_de_ferias.png'] });
 }
 
 
-function hollywoodCommand(message) {
-    message.channel.send("Bora pra hollywood =) ", { files: ['./img/hollywood.jpeg'] });
+function hollywoodCommand(message: Message) {
+    message.channel.send({content: "Bora pra hollywood =) ",  files: ['./img/hollywood.jpeg'] });
 }
 
-function tipoItemCommand(message) {
-    message.channel.send("Everyday I wake up TipoItem", { files: ['./img/everyday_tipo_item.png'] });
-}
-
-
-function baddeployCommand(message) {
-    message.channel.send("Quando o deploy da ruim", { files: ['./img/deploy_deu_ruim.png'] });
-}
-
-function updatephpCommand(message) {
-    message.channel.send("Update sem where de belo monte.", { files: ['./img/updatephp.jpg'] });
+function tipoItemCommand(message: Message) {
+    message.channel.send({content: "Everyday I wake up TipoItem",  files: ['./img/everyday_tipo_item.png'] });
 }
 
 
-function gooddeployCommand(message) {
-    message.channel.send("Quando o deploy da bom", { files: ['./img/deploy_deu_bom.png'] });
+function baddeployCommand(message: Message) {
+    message.channel.send({content: "Quando o deploy da ruim",  files: ['./img/deploy_deu_ruim.png'] });
 }
 
-function sala_do_crisCommand(message) {
-    message.channel.send(`Olá ψ(._. )>`, { files: ['./img/sala_do_cris.png'] });
+function updatephpCommand(message: Message) {
+    message.channel.send({content: "Update sem where de belo monte.", files: ['./img/updatephp.jpg'] });
 }
 
-function phpCommand(message) {
-    message.channel.send(`PH~~ili~~P~~i~~`, { files: ['./img/php.png'] });
+
+function gooddeployCommand(message: Message) {
+    message.channel.send({content: "Quando o deploy da bom",  files: ['./img/deploy_deu_bom.png'] });
 }
 
-function vita1Command(message) {
-    message.channel.send("Vita1: futuro arquiteto de software", { files: ['./img/vita1.png'] });
+function sala_do_crisCommand(message: Message) {
+    message.channel.send({content: `Olá ψ(._. )>`,  files: ['./img/sala_do_cris.png'] });
 }
 
-function cronometroCommand(message) {
+function phpCommand(message: Message) {
+    message.channel.send({content: `PH~~ili~~P~~i~~`,  files: ['./img/php.png'] });
+}
+
+function vita1Command(message: Message) {
+    message.channel.send({content: "Vita1: futuro arquiteto de software", files: ['./img/vita1.png'] });
+}
+
+function cronometroCommand(message: Message) {
     const qtdRounds = Number(message.content.split(" ")[1]);
     if (qtdRounds && Number.isInteger(qtdRounds)) {
         message.channel.send(`Cronometro iniciado! \nRound 1 de ${qtdRounds}! \nTempo: 60s`).then((msgRef) => {
@@ -298,16 +283,15 @@ function cronometroCommand(message) {
     }
 }
 
-function startCronometro(msgRef, roundTotal, roundAtual, tempo) {
+function startCronometro(msgRef:Message, roundTotal:number, roundAtual:number, tempo:number) {
     if (roundAtual <= roundTotal) {
-        //msgRef.edit(`Cronometro iniciado! \n Round ${roundAtual} de ${roundTotal}! \n Tempo: ${tempo}s`)
         cronometrar(msgRef, roundTotal, roundAtual, tempo);
     } else {
         msgRef.edit(`Cronometro finalizado! \nRound ${roundAtual - 1} de ${roundTotal}! \nTempo: Over!`)
     }
 }
 
-function cronometrar(msgRef, roundTotal, roundAtual, tempo) {
+function cronometrar(msgRef:Message, roundTotal:number, roundAtual:number, tempo:number) {
     if (tempo > 0) {
         msgRef.edit(`Cronometro iniciado! \nRound ${roundAtual} de ${roundTotal}! \nTempo: ${tempo}s`)
         setTimeout(() => {
@@ -318,35 +302,27 @@ function cronometrar(msgRef, roundTotal, roundAtual, tempo) {
     }
 }
 
-function almocoCommand(message) {
-    //@ts-ignore
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi almoçar!`);
-    //@ts-ignore
-    message.member.voice.setChannel(getAlmocoVoiceChannelId(message));
+function almocoCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} foi almoçar!`);
+    message.member?.voice.setChannel(getAlmocoVoiceChannelId(message));
 }
 
-function cafezinCommand(message) {
-    //@ts-ignore
-    client.channels.cache.get(getNotificacoesVoiceChannelId(message)).send(`${message.member.displayName} foi tomar um cafezin e ja volta!`);
-
-    //@ts-ignore
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function cafezinCommand(message: Message) {
+    (client.channels.cache.get(getNotificacoesVoiceChannelId(message))as any).send(`${message.member?.displayName} foi tomar um cafezin e ja volta!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function afkCommand(message) {
-    const notificaoId = getNotificacoesVoiceChannelId(message)
-        //@ts-ignore
-    client.channels.cache.get(notificaoId).send(`${message.member.displayName} precisou sair e ja volta!`);
-
-    //@ts-ignore
-    message.member.voice.setChannel(getAfkVoiceChannelId(message));
+function afkCommand(message: Message) {
+    const notificaoId = getNotificacoesVoiceChannelId(message);
+    (client.channels.cache.get(notificaoId)as any).send(`${message.member?.displayName} precisou sair e ja volta!`);
+    message.member?.voice.setChannel(getAfkVoiceChannelId(message));
 }
 
-function sendCommand(message) {
+function sendCommand(message: Message) {
     message.channel.send(message.content.slice(6));
 }
 
-function dailyCommand(message) {
+function dailyCommand(message: Message) {
     try {
 
         message.channel.send("@everyone Daily!");
@@ -389,12 +365,13 @@ const helpCommandInfo = {
     hollywood: 'Bora pra hollywwood!',
 }
 
-function helpCommand(message) {;
+function helpCommand(message: Message) {
     message.channel.send({
-        embed: {
+        embeds: [{
             color: 3447003,
             title: "Comandos:",
-            fields: [{
+            fields: [
+                {
                     name: "Valor",
                     value: Object.keys(helpCommandInfo).map(i => `!${i}`).join('\n'),
                     inline: true
@@ -405,6 +382,6 @@ function helpCommand(message) {;
                     inline: true
                 }
             ]
-        }
+        }]
     });
 }
