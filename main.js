@@ -99,6 +99,9 @@ client.on('message', message => {
             case 'daily':
                 dailyCommand(message);
                 break;
+            case 'updatephp':
+                updatephpCommand(message);
+                break;
             case 'help':
                 helpCommand(message);
                 break;
@@ -326,6 +329,11 @@ function baddeployCommand(message) {
     message.channel.send("Quando o deploy da ruim", { files: ['./img/deploy_deu_ruim.png'] });
 }
 
+function updatephpCommand(message) {
+    // message.delete();
+    message.channel.send("Update sem where de belo monte.", { files: ['./img/updatephp.jpg'] });
+}
+
 
 function gooddeployCommand(message) {
     // message.delete();
@@ -398,6 +406,7 @@ const helpCommandInfo = {
     rafaQA: 'Selo de qualidade do rafa',
     vitao: 'Rafa tá de ferias!?',
     vita1: 'Vita1: futuro arquiteto de software',
+    updatephp: 'Update selo de qualidade do php',
     almoco: 'Almoçar',
     cafezin: 'Toma um cafézin',
     afk: 'Fica AFK',
